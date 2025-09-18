@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" href="Icona.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyTab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    z-index: 1000;
+}
+
+.nomeSito h1 {
+    font-size: 28px;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navigazione {
+    display: flex;
+    gap: 30px;
+}
+
+.bottone{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 25px;  
+    font-weight: bold;
+}
+
+
+.bottone:hover{
+    background: rgba(79, 172, 254, 0.2);
+    border-color: #4facfe;
+    transform: translateY(-2px);
+}
+
+#githubBottone{
+    gap: 5px;
+}
+
+
+/* Sfondo stellato animato */
+.backgroundDelleStelle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    z-index: -1;
+    transition: opacity 0.8s ease-out;
+}
+
+.stelle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: luccichio 3s infinite alternate;
+}
+
+@keyframes luccichio {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+.stellaCadente {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+    animation: movimento 4s linear infinite;
+    opacity: 0;
+}
+
+@keyframes movimento {
+    0% {
+        transform: translateX(-100px) translateY(100px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(300px) translateY(-100px);
+        opacity: 0;
+    }
+}
+
+/* Contenitore principale */
+.contenitoreSezioni {
+    height: 325vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* Sezioni di testo */
+.testo {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.contenitoreTesto {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.contenitoreTesto h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 300;
+    line-height: 1.4;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+}
+
+.contenitoreTesto.active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease-out;
+}
+
+.elenco{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    list-style-type: disc;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+
+/* Sezione finale - Home */
+.sezionePrincipale {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.sezionePrincipale.active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1s ease-out;
+}
+
+.contenitoreHome {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenitoreHome h1 {
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contenitoreHome p {
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.bottoneHome {
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.bottoneHome:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+}
+
+/* Barra avanzamento */
+.barra {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+
+</style>
+        
+</head>
+
+<body>
+    <!-- Barra di avanzamento -->
+    <div class="barra"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nomeSito">
+            <h1>EasyTab</h1>
+        </div>
+        <div class="navigazione">
+            <div class="bottone">
+                <h3>Home</h3>
+            </div>
+            <div class="bottone" id="githubBottone">
+                <i class="fab fa-github"></i> GitHub
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sfondo stellato -->
+    <div class="backgroundDelleStelle" id="sfondoStelle"></div>
+
+    <!-- Contenitore per lo scroll -->
+    <div class="contenitoreSezioni">
+        
+        <div class="testo" id="sezione1">
+            <div class="contenitoreTesto">
+                <h2>Sei stanco di compilare a mano le tabelle su Excel?</h2>
+            </div>
+        </div>
+
+        
+        <div class="testo" id="sezione2">
+            <div class="contenitoreTesto">
+                <h2>Vorresti convertire le tue tabelle in file leggibili da Clingo ma non sai come fare?</h2>
+            </div>
+        </div>
+
+        
+        <div class="testo" id="sezione3">
+            <div class="contenitoreTesto">
+                <h2>Sei nel posto giusto!</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione Home -->
+    <div class="sezionePrincipale" id="sezioneHome">
+        <div class="contenitoreHome">
+            <h1>EasyTab</h1>
+            <p>Un Add-in per Excel che ti permette di:</p>
+            <ul class="elenco">
+                <li>Leggere file in formato logico e trasformarli in tabelle su Excel;</li>
+                <li>Convertire tabelle in file in sintassi logica;</li>
+                <li>Risolvere problemi logici e consultarne i risultati direttamente da Excel.</li>
+            </ul>
+            <p>Cosa aspetti? Clicca qui sotto e scarica l'Add-in!</p>
+            <a 
+            href="https://github.com/MarcelloLuciani/EasyTab/releases/download/v1.5/EasyTab_Installer.exe" 
+            class="bottoneHome" 
+            download="EasyTab_Setup.exe">Scarica</a>
+        </div>
+    </div>
+    
+    <script>
+
+    // Creazione del cielo stellato
+    function creaStelle() {
+        const sfondoStelle = document.getElementById('sfondoStelle');
+        const numeroStelle = 150;
+        
+        for (let i = 0; i < numeroStelle; i++) {
+            const stella = document.createElement('div');
+            stella.className = 'stelle';
+            stella.style.left = Math.random() * 100 + '%';
+            stella.style.top = Math.random() * 100 + '%';
+            stella.style.animationDelay = Math.random() * 3 + 's';
+            stella.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            sfondoStelle.appendChild(stella);
+        }
+
+        // Stelle cadenti
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                const stellaCadente = document.createElement('div');
+                stellaCadente.className = 'stellaCadente';
+                stellaCadente.style.left = Math.random() * 100 + '%';
+                stellaCadente.style.top = Math.random() * 50 + '%';
+                sfondoStelle.appendChild(stellaCadente);
+
+                setTimeout(() => {
+                    stellaCadente.remove();
+                }, 4000);
+            }
+        }, 2000);
+    }
+
+    // Gestione scroll
+    function gestioneScroll() {
+        const scrollTop = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const scrollProgress = document.querySelector('.barra');
+        const sezioneTesti = document.querySelectorAll('.testo .contenitoreTesto');
+        const sezioneHome = document.getElementById('sezioneHome');
+
+        
+        const maxScroll = document.querySelector('.contenitoreSezioni').offsetHeight;
+        const progress = Math.min((scrollTop / maxScroll) * 100, 100);
+        scrollProgress.style.width = progress + '%';
+
+        
+        const sezioneIndex = Math.floor(scrollTop / windowHeight);
+        
+        // Reset di tutte le sezioni
+        sezioneTesti.forEach((sezione, index) => {
+            sezione.classList.remove('active');
+        });
+        sezioneHome.classList.remove('active');
+
+        // Attivazione della sezione corrente
+        if (sezioneIndex < sezioneTesti.length && sezioneIndex >= 0) {
+            sezioneTesti[sezioneIndex].classList.add('active');
+        } else if (sezioneIndex >= sezioneTesti.length) {
+            sezioneHome.classList.add('active');
+        }
+        
+        
+    }
+
+    // Scroll per i link della navbar
+    function contenitoreSezioni() {
+        const navLinks = document.querySelectorAll('.bottone');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const text = link.textContent.trim();
+                
+                if (text === 'Home') {
+                    window.scrollTo({
+                        top: document.querySelector('.contenitoreSezioni').offsetHeight,
+                        behavior: 'auto'
+                    });
+                }
+            });
+        });
+    }
+
+    // Inizializzazione delle funzioni
+    document.addEventListener('DOMContentLoaded', () => {
+        creaStelle();
+        contenitoreSezioni();
+        
+        // Prima sezione attiva all'inizio
+        document.querySelector('#sezione1 .contenitoreTesto').classList.add('active');
+        
+        // Scroll listener 
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    gestioneScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    });
+
+    // Gestione resize
+    window.addEventListener('resize', () => {
+        gestioneScroll();
+    });
+
+    // Bottone GitHub
+    document.getElementById("githubBottone").addEventListener("click", function() {
+        window.open("https://github.com/MarcelloLuciani/EasyTab/", "_blank");
+    });
+
+    </script>
+
+    </body>
+</html>
