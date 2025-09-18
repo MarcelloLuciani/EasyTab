@@ -71,13 +71,13 @@ xls_input_types(nome_foglio(parametro, tipo)).
 
 - I tipi disponibili non sono case sensitive e sono:
 
-1. integer: accettare valori interi (-999999 … 999999)
+1. integer: accetta valori interi (-999999 … 999999)
 
-2. decimal: accettare numeri reali (-1e307 … 1e307)
+2. decimal: accetta numeri reali (-1e307 … 1e307)
 
-3. string: accettare qualsiasi stringa
+3. string: accetta qualsiasi stringa
 
-4. multivalued: specificare valori ammessi ripetendo la scrittura
+4. multivalued: specificare i valori ammessi ripetendo la scrittura
 
 Se non specificato, il tipo predefinito è string.
 
