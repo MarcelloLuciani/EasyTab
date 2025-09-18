@@ -1,7 +1,9 @@
 EasyTab Add-in per Microsoft Excel
 ====================================
 
-<img src="docs/Icona.png" alt="Logo" width="150"/>
+<p align="center">
+  <img src="docs/Icona.png" alt="Logo" width="150"/>
+</p>
 
 ================== **A cosa serve** ==================
 
@@ -53,16 +55,19 @@ A volte è possibile che nonostante l'Add-in sia stato caricato Excel blocchi l'
 
 ```prolog
 xls_input(nome_foglio(parametri)).
+```
 
 Esempio:
 
 ```prolog
 xls_input(pazienti("nome", "eta", "sesso")).
+```
 
 - Mentre per quanto riguarda la definizione dei tipi di dato bisogna seguire la seguente sintassi:
 
 ```prolog
 xls_input_types(nome_foglio(parametro, tipo)).
+```
 
 - I tipi disponibili non sono case sensitive e sono:
 
@@ -84,6 +89,7 @@ xls_input_types(pazienti("peso", "decimal")).
 xls_input_types(pazienti("nome", "string")).
 xls_input_types(pazienti("sesso", "maschio")).
 xls_input_types(pazienti("sesso", "femmina")).
+```
 
 2️⃣ Convertitore
 
@@ -95,7 +101,7 @@ xls_input_types(pazienti("sesso", "femmina")).
 
 ```
 #show
-
+```
 per standardizzare il formato della risposta.
 
 Esempio:
@@ -115,6 +121,7 @@ pazienti("Lucia", 9).
 minorenne(Nome) :- pazienti(Nome, Eta), Eta < 18.
 
 #show minorenne/1.
+```
 
 Questo genererà un foglio minorenne con una tabella contenente: Giovanni, Luca, Lucia.
 
