@@ -1,7 +1,7 @@
 EasyTab Add-in per Microsoft Excel
 ====================================
 
-![Logo](docs/Icona.png)
+<img src="docs/Icona.png" alt="Logo" width="150"/>
 
 ================== **A cosa serve** ==================
 
