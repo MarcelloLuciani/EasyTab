@@ -91,11 +91,11 @@ xls_input_types(pazienti("sesso", "maschio")).
 xls_input_types(pazienti("sesso", "femmina")).
 ```
 
-2️⃣ Convertitore
+### 2️⃣ Convertitore
 
 - Non ha regole particolari di utilizzo.
 
-3️⃣ Risoluzione ASP
+### 3️⃣ Risoluzione ASP
 
 - Utilizzare file .ini, .cfg, .json, .asp, .lp, .txt, .pl. All'interno di questi file è necessario che ci sia la direttiva:
 
