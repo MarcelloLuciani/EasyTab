@@ -10,6 +10,7 @@ from pathlib import Path
     # 0: corretta esecuzione
     # 2: errore excel
     # 3: nessuna soluzione possibile
+    # 4: nessuna riga show trovata
     # 99: altri errori
 
 def make_on_model(mappa):
@@ -39,6 +40,7 @@ lpFiles = argv[1:]
 mappaRisultati = {}
 
 soluzioneTrovata = False
+showTrovato = False
 
 # Creo un file temporaneo che conterrà il contenuto di tutti i file passati come
 # paramentro
@@ -51,10 +53,18 @@ for file in lpFiles:
     with open(file, "r") as f:
         while line := f.readline():
             fileTemp.write(line)
+            if line.strip().startswith("#show"):
+                showTrovato = True
     fileTemp.write("\n\n")
+
+
 
 fileTemp.close()
 
+if not showTrovato:
+    print("Nessuna riga nel formato \"#show\" trovata! Correggere e avviare nuovamente la funzione!")
+    input("Premere invio per continuare...")
+    exit("4")
 
 file = os.path.abspath(percorsoFileTemp)  # percorso assoluto
 
