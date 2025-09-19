@@ -17,14 +17,18 @@ Ti permette di:
 - **Convertire tabelle Excel** in file scritti in sintassi logica.
 - **Risolvere programmi logici (ASP)** e consultare i risultati direttamente nei fogli di lavoro.
 
-================== **Installazione** ==================
+<p align="center">
+================== <b>Installazione</b> ==================
+</p>
 
 1. Scaricare l’ultima versione dell’installer da [Release](../../releases/latest).  
 2. Avviare `EasyTab_Installer.exe` e attendere il completamento delle operazioni.  
 3. Al termine, l’Add-in verrà copiato nella cartella predefinita: `[LetteraUnità]:\Program Files\EasyTab`
 (ad es. C:\Program Files\EasyTab se Windows è stato installato sul disco C:)
 
-================== **Disinstallazione** ==================
+<p align="center">
+================== <b>Disinstallazione</b> ==================
+</p>
 
 1. Disattivare l’Add-in da Excel:  
 - Aprire Excel → File → Opzioni → Componenti aggiuntivi → [Vai...]  
@@ -32,7 +36,9 @@ Ti permette di:
 2. Aprire il **Pannello di Controllo → Programmi → Disinstalla un programma**  
 3. Selezionare dalla lista “EasyTab Add-in per Excel” e procedere con la disinstallazione.
 
-================== **Come attivare l'Add-in** ==================
+<p align="center">
+================== <b>Come attivare l'Add-in</b> ==================
+</p>
 
 1. Aprire Microsoft Excel.  
 2. Selezionare: `File → Opzioni → Componenti aggiuntivi`.  
@@ -128,7 +134,9 @@ minorenne(Nome) :- pazienti(Nome, Eta), Eta < 18.
 
 Questo genererà un foglio minorenne con una tabella contenente: Giovanni, Luca, Lucia.
 
-================== **Risoluzione dei Problemi** ==================
+<p align="center">
+================== <b>Risoluzione dei Problemi</b> ==================
+</p>
 
 1. Excel non trova l’Add-in
 → Verificare il percorso corretto nella cartella:
@@ -137,9 +145,11 @@ Questo genererà un foglio minorenne con una tabella contenente: Giovanni, Luca,
 2. Le macro non funzionano
 → Controllare che le macro siano abilitate (vedi sezione Abilitare le macro).
 
-================== **Supporto** ==================
+<p align="center">
+================== <b>Supporto</b> ==================
+</p>
 
-Segnalare bug o proporre migliorie tramite Issue su GitHub
+Segnalare bug o proporre migliorie tramite Issue su GitHub o scrivere una mail al seguente indirizzo: <b> marcello.luciani2@gmail.com
 
 ====================================
 
