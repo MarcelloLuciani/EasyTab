@@ -108,7 +108,7 @@ xls_input_types(pazienti("sesso", "femmina")).
 
 ### 3️⃣ Risoluzione ASP
 
-- Utilizzare file `.ini, .cfg, .json, .asp, .lp, .txt, .pl`. All'interno di questi file è necessario che ci sia la direttiva:
+- Utilizzare file `.ini`, `.cfg`, `.json`, `.asp`, `.lp`, `.txt`, `.pl`. All'interno di questi file è necessario che ci sia la direttiva:
 
 ```
 #show
