@@ -5,7 +5,10 @@ EasyTab Add-in per Microsoft Excel
   <img src="docs/Icona.png" alt="Logo" width="150"/>
 </p>
 
-================== **A cosa serve** ==================
+<p align="center">
+================== <b>A cosa serve</b> ==================
+</p>
+
 
 EasyTab è un **Add-in per Microsoft Excel** che estende le funzionalità di Excel integrando Python.  
 Ti permette di:

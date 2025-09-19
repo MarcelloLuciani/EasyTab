@@ -32,7 +32,7 @@ def indice_colonna_to_lettera(n):
     return lettere
 
 
-cartella = Path.home() / "Documents" / "EasyPlan"
+cartella = Path.home() / "Documents" / "EasyTab"
 cartella.mkdir(parents=True, exist_ok=True)
 
 lpFiles = argv[1:]
@@ -62,6 +62,7 @@ for file in lpFiles:
 fileTemp.close()
 
 if not showTrovato:
+    os.remove(percorsoFileTemp)
     print("Nessuna riga nel formato \"#show\" trovata! Correggere e avviare nuovamente la funzione!")
     input("Premere invio per continuare...")
     exit("4")

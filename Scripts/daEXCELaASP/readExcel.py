@@ -20,7 +20,7 @@ try:
     pythoncom.CoInitialize()
 
     # Percorso della cartella Documenti > DoctorPlan
-    cartella = Path.home() / "Documents" / "EasyPlan"
+    cartella = Path.home() / "Documents" / "EasyTab"
     cartella.mkdir(parents=True, exist_ok=True)
 
     excel = win32com.client.GetActiveObject("Excel.Application")
