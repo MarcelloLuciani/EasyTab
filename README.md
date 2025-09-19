@@ -56,7 +56,9 @@ A volte è possibile che nonostante l'Add-in sia stato caricato Excel blocchi l'
 4. Selezionare “Attivare tutte le macro”.  
 5. Confermare con **OK**.
 
-================== **Come utilizzare l'Add-in** ==================
+<p align="center">
+================== <b>Come utilizzare l'Add-in</b> ==================
+</p>
 
 ### 1️⃣ Lettura file
 
