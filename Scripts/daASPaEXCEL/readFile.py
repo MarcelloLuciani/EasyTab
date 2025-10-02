@@ -52,9 +52,9 @@ try:
                     continue
 
                 # Controllo con match preciso
-                if riga.startswith("xls_input_types("):
+                if riga.startswith("xls_input_types(") and riga.endswith("."):
                     vincoli.append(riga)
-                elif riga.startswith("xls_input("):
+                elif riga.startswith("xls_input(") and riga.endswith("."):
                     fogli.append(riga)
                 else:
                     raise Exception("Errore Riga ", f'Riga non conforme: \"{riga.replace("\n", "")}\" nel file {filepath}')
@@ -64,7 +64,6 @@ except Exception as ex:
     print("! ".join(ex.args))
     input("Premi invio per continuare...")
     exit(2)
-
 
 # Creazione del dizionario che conterrà i nomi dei vari fogli, le intestazioni delle tabelle ed eventuali vincoli
 fogliVincoliDict = {}
@@ -86,20 +85,31 @@ for foglio in fogli:
         if intestazione not in fogliVincoliDict[nomeFoglio]:
             fogliVincoliDict[nomeFoglio][intestazione] = []
 
-# Manipolazione stringhe per i Vincoli
-for vincolo in vincoli:
-    rigaModificata = vincolo[16:len(vincolo)-3]
-    
-    nomeFoglio = rigaModificata.split("(")[0]
-    
-    listaVincoli = rigaModificata.split("(")[1].split(",")
+try:
 
-    for x in range(len(listaVincoli)):
-        listaVincoli[x] = listaVincoli[x].strip().replace("\"","")
+    # Manipolazione stringhe per i Vincoli
+    for vincolo in vincoli:
+        rigaModificata = vincolo[16:len(vincolo)-3]
+        
+        nomeFoglio = rigaModificata.split("(")[0]
+        
+        listaVincoli = rigaModificata.split("(")[1].split(",")
+
+        for x in range(len(listaVincoli)):
+            listaVincoli[x] = listaVincoli[x].strip().replace("\"","")
+        
+        if nomeFoglio in fogliVincoliDict:
+            if listaVincoli[0] in fogliVincoliDict[nomeFoglio]:
+                fogliVincoliDict[nomeFoglio][listaVincoli[0]].append(listaVincoli[1])
+        else:
+            raise Exception("Probabile errore di battitura! ", f'Vincolo non riconosciuto: \"{vincolo.replace("\n", "")}\"')
+
+except Exception as ex:
     
-    if nomeFoglio in fogliVincoliDict:
-        if listaVincoli[0] in fogliVincoliDict[nomeFoglio]:
-            fogliVincoliDict[nomeFoglio][listaVincoli[0]].append(listaVincoli[1])
+    print("! ".join(ex.args))
+    input("Premi invio per continuare...")
+    exit(3)
+
 
 # Lista per le validazioni da inserire nel foglio "Liste"
 liste_per_intestazione = {}
@@ -133,11 +143,6 @@ ws_liste.Cells.Clear()
 
 
 try:
-
-    #        A                B             C           D
-    #1 paziente_nome    pazienti_eta    gatti_sesso  gatti_sesso
-    #2 string           integer         maschio      femmina
-    #
 
 
     lista_chiavi = list(liste_per_intestazione.keys())
@@ -212,6 +217,7 @@ try:
             range_validazione.Validation.Delete()           #Per sicurezza
 
             chiave = (nomeFoglio, intestazione)
+
             
             if vincoli_colonna_lower == "" or vincoli_colonna_lower == "string":
                 #print("Sono una stringa")
@@ -261,7 +267,6 @@ try:
                     if chiave in liste_per_intestazione:
                         col_liste_idx = calc_correct(liste_per_intestazione, lista_chiavi, lista_chiavi.index(chiave) + 1)
                         num_valori = len(vincoli_colonna)
-
                         col_iniziale = indice_colonna_to_lettera(col_liste_idx)
                         col_finale = indice_colonna_to_lettera(col_liste_idx+num_valori-1)
                         formula = f"=Liste!${col_iniziale}$2:${col_finale}$2"
